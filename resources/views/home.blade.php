@@ -22,6 +22,9 @@
                 @error('file')
                     <small>{{ $message }}</small>
                 @enderror
+                <div>
+                    <img id="picture_preview" src="" class="mb-3">
+                </div>
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
                 <div class="title-save">
                     <input type="text" placeholder="titulo de la imagen" name="title">
@@ -111,3 +114,22 @@
         </div>
     </section>
 </x-app-layout>
+
+@section('js')
+
+    <script>
+        document.getElementById("image").addEventListener('change', cambiarImagenPortada);
+
+        function cambiarImagenPortada(event) {
+            var file = event.target.files[0];
+
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                document.getElementById("picture_preview").setAttribute('src', event.target.result)
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+@stop
