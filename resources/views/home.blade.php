@@ -17,14 +17,14 @@
             </div>
             <form action="{{ route('image.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <label for="image" class="upload-image">Select Picture</label>
-                <input type="file" name="image" id="image" accept="image/*" hidden><br>
+                <label for="image-upload" class="upload-image">Select Picture</label>
+                <input type="file" name="image" id="image-upload" accept="image/*" hidden><br>
                 @error('file')
                     <small>{{ $message }}</small>
                 @enderror
-                <div>
+                {{-- <div>
                     <img id="picture_preview" src="" class="mb-3">
-                </div>
+                </div> --}}
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
                 <div class="title-save">
                     <input type="text" placeholder="titulo de la imagen" name="title">
@@ -118,9 +118,11 @@
 @section('js')
 
     <script>
-        document.getElementById("image").addEventListener('change', cambiarImagenPortada);
+        document.getElementById("image-upload").addEventListener('change', cambiarImagenPortada);
 
         function cambiarImagenPortada(event) {
+            alert('hola');
+
             var file = event.target.files[0];
 
             var reader = new FileReader();
